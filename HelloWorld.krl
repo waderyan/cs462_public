@@ -25,7 +25,7 @@ ruleset HelloWorldApp {
     select when pageview ".*" setting ()
     notify("Hello World", "This is a sample rule.") with sticky = true;
   }
-  rule clearCnt {
+  rule ClearCnt {
     select when pageview ".*"
     if page:url("query").match(re/clear/) then {
       notify("Count is cleared", "") with sticky = true;
