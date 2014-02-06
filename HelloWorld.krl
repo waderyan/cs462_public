@@ -38,7 +38,7 @@ ruleset HelloWorldApp {
     select when pageview ".*"
     pre {
        //name = (page:url("query") eq "") => "Monkey" | page:url("query");
-       name = getVal("name");
+       name = (getVal("name") eq "") => "Monkey" | getVal("name");
        count = ent:count;
     }
     if ent:count < 5 then {
