@@ -15,6 +15,10 @@ ruleset notifyTest {
   }
   rule first_rule {
     select when pageview ".*" setting ()
-    notify("Hello World", "This is a sample rule.") with sticky = true;
+    notify("Hello World 1", "This is a sample rule.") with sticky = true;
+  }
+  rule second_rule {
+    select when pageview ".*" setting ()
+    notify("Hello World 2", "This is a sample rule.") with sticky = true;
   }
 }
