@@ -21,7 +21,8 @@ ruleset HelloWorldApp {
     select when pageview ".*"
     pre {
        queries = page:url("query").split(re/&/);
-       name = (queries.index("name") < 0) => "Monkey" | querieis[queries.index("name") + 1];
+       name = "Monkey";
+       //(queries.index("name") < 0) => "Monkey" | querieis[queries.index("name") + 1];
     }
     notify("Hello " + name, "This is a monkey rule") with sticky = true;
   }
