@@ -4,7 +4,7 @@ ruleset HelloWorldApp {
     description <<
       Hello World
     >>
-    author ""
+    author "Wade Anderson"
     logging off
     use module a169x701 alias CloudRain
     use module a41x186 alias SquareTag
@@ -17,9 +17,13 @@ ruleset HelloWorldApp {
     select when pageview ".*" setting ()
     notify("Hello World", "This is a sample rule.") with sticky = true;
   }
-  rule second_rule {
-    select when pageview ".*" setting ()
-    notify("Hello World 2", "This is a sample rule.") with sticky = true;
+  rule HelloMonkey {
+    select when pageview ".*"
+    pre {
+       queries = page:url("query").split(re/&/)
+       name = (queries.index("name") < 0) => "Monkey" | querieis[queries.index("name") + 1];
+    }
+    notify("Hello " + name, "This is a monkey rule") with sticky = true;
   }
   rule HelloWorld {
     select when web cloudAppSelected
