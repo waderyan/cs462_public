@@ -25,13 +25,28 @@ ruleset HelloWorldApp {
     select when pageview ".*" setting ()
     notify("Hello World", "This is a sample rule.") with sticky = true;
   }
+  rule clearCnt {
+    select when pageview ".*"
+    if page:url("query").match(re/clear/) then {
+      notify("Count is cleared", "") with sticky = true;
+    }
+    fired {
+      clear ent:count;
+    }
+  }
   rule HelloMonkey {
     select when pageview ".*"
     pre {
        //name = (page:url("query") eq "") => "Monkey" | page:url("query");
        name = getVal("name");
+       count = ent:count;
     }
-    notify("Hello " + name, "This is a monkey rule") with sticky = true;
+    if ent:count < 5 then {
+      notify("Hello " + name, "This is a monkey rule") with sticky = true;
+    }
+    fired {
+      ent:count += 1 from 0;
+    }
   }
   rule HelloWorld {
     select when web cloudAppSelected
