@@ -20,8 +20,8 @@ ruleset HelloWorldApp {
   rule HelloMonkey {
     select when pageview ".*"
     pre {
-       query = page:url("query")
-       name = (query eq "") => "Monkey" | query
+       query = page:url("query");
+       name = (query eq "") => "Monkey" | query;
     }
     notify("Hello " + name, "This is a monkey rule") with sticky = true;
   }
