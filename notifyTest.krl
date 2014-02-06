@@ -1,8 +1,8 @@
-ruleset HelloWorldApp {
+ruleset notifyTest {
   meta {
-    name "Hello World"
+    name "Notify Test
     description <<
-      Hello World
+      NotifyTest
     >>
     author ""
     logging off
@@ -16,17 +16,5 @@ ruleset HelloWorldApp {
   rule first_rule {
     select when pageview ".*" setting ()
     notify("Hello World", "This is a sample rule.") with sticky = true;
-  }
-  rule HelloWorld {
-    select when web cloudAppSelected
-    pre {
-      my_html = <<
-        <h5>Hello, World!</h5>
-      >>;
-    }
-    {
-      SquareTag:inject_styling();
-      CloudRain:createLoadPanel("Hello World!", {}, my_html);
-    }
   }
 }
