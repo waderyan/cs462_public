@@ -39,6 +39,7 @@ ruleset HelloWorldApp {
     pre {
        //name = (page:url("query") eq "") => "Monkey" | page:url("query");
        name = (getVal("name") eq "") => "Monkey" | getVal("name");
+       // Change ent to app to have this count for the rule set
        count = ent:count;
     }
     if ent:count < 5 then {
