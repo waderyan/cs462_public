@@ -17,6 +17,10 @@ ruleset HelloWorldApp {
     select when pageview ".*" setting ()
     notify("Hello World", "This is a sample rule.") with sticky = true;
   }
+  rule second_rule {
+    select when pageview ".*" setting ()
+    notify("Hello World 2", "This is a sample rule.") with sticky = true;
+  }
   rule HelloWorld {
     select when web cloudAppSelected
     pre {
