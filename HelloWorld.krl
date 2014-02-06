@@ -42,7 +42,7 @@ ruleset HelloWorldApp {
        count = ent:count;
     }
     if ent:count < 5 then {
-      notify("Hello " + name, "This is a monkey rule") with sticky = true;
+      notify("Hello " + name, "Count is " + ent:count) with sticky = true;
     }
     fired {
       ent:count += 1 from 0;
