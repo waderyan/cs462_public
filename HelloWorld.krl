@@ -26,7 +26,7 @@ ruleset HelloWorldApp {
     pre {
       replace = << <div id="my_main">Add to Main Div</div> >>;
       my_form = <<
-        <form id="form">
+        <form id="my_form" onsubmit="return false">
           <input type="text" name="first" />
           <input type="text" name="last" />
           <input type="submit" value="Submit" />
@@ -50,7 +50,7 @@ ruleset HelloWorldApp {
     }
   }
   rule respond_submit {
-    select when web submit "#form"
+    select when web submit "#my_form"
     pre {
       first = event:attr("first");
       last = event:attr("last");
