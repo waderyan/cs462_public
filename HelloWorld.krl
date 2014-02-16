@@ -56,7 +56,7 @@ ruleset HelloWorldApp {
       last = event:attr("last");
       full = first+" "+last;
     }
-    replace_inner("#my_main", "Welcome ${full}");
+    replace_inner("#main", "Welcome ${full}");
     fired {
       set ent:first first;
       set ent:last last;
