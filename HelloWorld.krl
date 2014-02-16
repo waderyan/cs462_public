@@ -26,7 +26,7 @@ ruleset HelloWorldApp {
     pre {
       replace = << <div id="main">Add to Main Div</div> >>;
       my_form = <<
-        <form id="form" onsubmit="return false">
+        <form id="form">
           <input type="text" name="first" />
           <input type="text" name="last" />
           <input type="submit" value="Submit" />
@@ -35,6 +35,7 @@ ruleset HelloWorldApp {
     }
     append("#main", replace);
     append("#main", my_form);
+    watch("#form", "submit");
   }
   rule respond_submit {
     select when web submit "#form"
