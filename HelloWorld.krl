@@ -22,7 +22,7 @@ ruleset HelloWorldApp {
     };
   }
   rule show_form {
-    select when pageview
+    select when pageview ".*"
     pre {
       replace = << <div id="my_main">Add to Main Div</div> >>;
       my_form = <<
@@ -37,20 +37,41 @@ ruleset HelloWorldApp {
       append("#main", replace);
       append("#my_main", my_form);
       watch("#my_main", "submit");
-    } 
+    }
+  }
+  rule welcome {
+    select when pageview ".*"
+    pre {
+      replace = << <div id="my_main"></div> <<;
+    }
+    if(ent:full) then {
+      append("#main", replace);
+      replace_inner("#my_main", "Welcome ${ent:full}");
+    }
   }
   rule respond_submit {
     select when web submit "#form"
     pre {
       first = event:attr("first");
       last = event:attr("last");
-      full = first + " " + last;
+      full = first+" "+last;
     }
     replace_inner("#my_main", "Welcome ${full}");
     fired {
       set ent:first first;
       set ent:last last;
       set ent:full full;
+    }
+  }
+  rule clearName {
+    select when pageview ".*"
+    if page:url("query").match(re/clear/) then {
+      notify("Count is cleared", "") with sticky = true;
+    }
+    fired {
+      clear ent:full;
+      clear ent:first;
+      clear ent:last;
     }
   }
   rule first_rule {
