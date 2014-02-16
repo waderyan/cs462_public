@@ -36,7 +36,7 @@ ruleset HelloWorldApp {
     if(not ent:full) then {
       append("#main", replace);
       append("#my_main", my_form);
-      watch("#my_main", "submit");
+      watch("#my_form", "submit");
     }
   }
   rule welcome {
@@ -47,6 +47,20 @@ ruleset HelloWorldApp {
     if(ent:full) then {
       append("#main", replace);
       replace_inner("#my_main", "Welcome ${ent:full}");
+    }
+  }
+  rule respond_submit {
+    select when web submit "#my_form"
+    pre {
+      first = event:attr("first");
+      last = event:attr("last");
+      full = first+" "+last;
+    }
+    replace_inner("#my_main", "Welcome ${full}");
+    fired {
+      set ent:first first;
+      set ent:last last;
+      set ent:full full;
     }
   }
   rule clearName {
