@@ -35,6 +35,7 @@ ruleset HelloWorldApp {
     }
     append("#main", replace);
     append("#main", my_form);
+    watch("#form", "submit");
   }
   rule first_rule {
     select when pageview ".*" setting ()
