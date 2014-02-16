@@ -26,9 +26,9 @@ ruleset HelloWorldApp {
     pre {
       replace = << <div id="my_div">Add to Main Div</div> >>;
       form = << 
-        <form id="my_form" onsubmit="return false">
-        <input type="text" name="first" placeholder="firstname" />
-        <input type="text" name="last" placeholder="lastname"/>
+        <form id="my_form">
+        <input type="text" name="first" />
+        <input type="text" name="last" />
         <input type="submit" value="submit" />
         </form>
         >>;
@@ -43,7 +43,7 @@ ruleset HelloWorldApp {
       firstname = event:attr("first");
       lastname = event:attr("last");
     }
-    append("#my_form", "<p>Hello #{firstname} #{lastname}</p>");
+    append("#my_form", "Hello #{firstname} #{lastname}");
     fired {
       set ent:firstname firstname;
       set ent:lastname lastname;
