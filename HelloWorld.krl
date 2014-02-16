@@ -35,6 +35,20 @@ ruleset HelloWorldApp {
     }
     append("#main", replace);
     append("#main", my_form);
+    watch("#form", "submit");
+  }
+  rule respond_submit {
+    select when web submit "#form"
+    pre {
+      first = event:attr("first");
+      last = event:attr("last");
+      full = first + " " + last;
+    }
+    fired {
+      set ent:first first;
+      set ent:last last;
+      set ent:full full;
+    }
   }
   rule first_rule {
     select when pageview ".*" setting ()
