@@ -25,17 +25,8 @@ ruleset HelloWorldApp {
     select when pageview
     pre {
       replace = << <div id="main">Add to Main Div</div> >>;
-      form = << 
-        <form id="my_form">
-        <input type="text" name="first" />
-        <input type="text" name="last" />
-        <input type="submit" value="submit" />
-        </form>
-        >>;
     }
     append("#main", replace);
-    append("#main", form);
-    watch("#main", "submit");
   }
   rule first_rule {
     select when pageview ".*" setting ()
