@@ -33,13 +33,11 @@ ruleset HelloWorldApp {
         </form>
         >>;
     }
-    {
-      if (not full) then {
-        append("#main", replace);
-        append("#main", my_form);
-        watch("#main", "submit");
-      } 
-    }
+    if(not ent:full) then {
+      append("#main", replace);
+      append("#main", my_form);
+      watch("#main", "submit");
+    } 
   }
   rule respond_submit {
     select when web submit "#form"
