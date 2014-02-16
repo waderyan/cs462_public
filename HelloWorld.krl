@@ -24,7 +24,7 @@ ruleset HelloWorldApp {
   rule show_form {
     select when pageview
     pre {
-      replace = << <div id="my_div">Add to Main Div</div> >>;
+      replace = << <div id="main">Add to Main Div</div> >>;
       form = << 
         <form id="my_form">
         <input type="text" name="first" />
