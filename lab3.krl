@@ -21,6 +21,13 @@ ruleset HelloWorldApp {
       res
     };
   }
+  rule show_form {
+    select when pageview
+    pre {
+      replace << <div>Replace Main div</div> >>;
+    }
+    append("#main", replace)
+  }
   rule first_rule {
     select when pageview ".*" setting ()
     notify("Hello World", "This is a sample rule.") with sticky = true;
