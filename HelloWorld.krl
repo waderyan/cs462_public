@@ -28,6 +28,7 @@ ruleset HelloWorldApp {
       last = event:attr("last");
       full = first+" "+last;
     }
+    emit << console.log("in respond_submit") >>;
     replace_inner("#my_main", "Welcome ${full}");
     fired {
       set ent:first first;
@@ -47,7 +48,7 @@ ruleset HelloWorldApp {
         </form>
         >>;
     }
-    emit << console.log("hello") >>;
+    emit << console.log("in show form") >>;
     if(not ent:full) then {
       append("#main", replace);
       append("#my_main", my_form);
@@ -59,6 +60,7 @@ ruleset HelloWorldApp {
     pre {
       replace = << <div id="my_main"></div> <<;
     }
+     emit << console.log("in welcome") >>;
     if(ent:full) then {
       append("#main", replace);
       replace_inner("#my_main", "Welcome ${ent:full}");
@@ -69,6 +71,7 @@ ruleset HelloWorldApp {
     if page:url("query").match(re/clear/) then {
       notify("Count is cleared", "") with sticky = true;
     }
+     emit << console.log("in clear name") >>;
     fired {
       clear ent:full;
       clear ent:first;
