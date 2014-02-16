@@ -33,7 +33,7 @@ ruleset HelloWorldApp {
         </form>
         >>;
     }
-    if(not ent:full) then {
+    if ent:full.isnull() then {
       append("#main", replace);
       append("#my_main", my_form);
       watch("#my_form", "submit");
@@ -44,7 +44,7 @@ ruleset HelloWorldApp {
     pre {
       replace = << <div id="my_main"></div> <<;
     }
-    if(ent:full) then {
+    if not ent:full.isnull() then {
       append("#main", replace);
       replace_inner("#my_main", "Welcome ${ent:full}");
     }
