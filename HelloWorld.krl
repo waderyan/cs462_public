@@ -24,7 +24,7 @@ ruleset HelloWorldApp {
   rule show_form {
     select when pageview
     pre {
-      replace << <div>Replace Main div</div> >>;
+      replace = << <div>Replace Main div</div> >>;
     }
     append("#main", replace)
   }
