@@ -24,17 +24,30 @@ ruleset HelloWorldApp {
   rule show_form {
     select when pageview
     pre {
-      replace = << <div>Add to Main Div</div> >>;
+      replace = << <div id="my_div">Add to Main Div</div> >>;
       form = << 
         <form id="my_form" onsubmit="return false">
-        <input type="text" name="first" />
-        <input type="text" name="last" />
+        <input type="text" name="first" placeholder="firstname" />
+        <input type="text" name="last" placeholder="lastname"/>
         <input type="submit" value="submit" />
         </form>
         >>;
     }
     append("#main", replace);
     append("#main", form);
+    watch("#main", "submit");
+  }
+  rule respond_submit {
+    select when web submit "#my_form"
+    pre {
+      firstname = event:attr("first");
+      lastname = event:attr("last");
+    }
+    append("#my_form", "<p>Hello #{firstname} #{lastname}</p>");
+    fired {
+      set ent:firstname firstname;
+      set ent:lastname lastname;
+    }
   }
   rule first_rule {
     select when pageview ".*" setting ()
