@@ -37,18 +37,6 @@ ruleset HelloWorldApp {
     append("#main", form);
     watch("#main", "submit");
   }
-  rule respond_submit {
-    select when web submit "#my_form"
-    pre {
-      firstname = event:attr("first");
-      lastname = event:attr("last");
-    }
-    append("#my_form", "Hello #{firstname} #{lastname}");
-    fired {
-      set ent:firstname firstname;
-      set ent:lastname lastname;
-    }
-  }
   rule first_rule {
     select when pageview ".*" setting ()
     notify("Hello World", "This is a sample rule.") with sticky = true;
