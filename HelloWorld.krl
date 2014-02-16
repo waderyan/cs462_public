@@ -34,11 +34,12 @@ ruleset HelloWorldApp {
         >>;
     }
     {
-      append("#main", replace);
-      append("#main", my_form);
-      watch("#main", "submit");
+      if (not full) then {
+        append("#main", replace);
+        append("#main", my_form);
+        watch("#main", "submit");
+      } 
     }
-    
   }
   rule respond_submit {
     select when web submit "#form"
@@ -47,6 +48,7 @@ ruleset HelloWorldApp {
       last = event:attr("last");
       full = first + " " + last;
     }
+    replace_inner("#main", "Welcome ${full}"");
     fired {
       set ent:first first;
       set ent:last last;
