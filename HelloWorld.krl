@@ -33,8 +33,12 @@ ruleset HelloWorldApp {
         </form>
         >>;
     }
-    append("#main", replace);
-    append("#main", my_form);
+    {
+      append("#main", replace);
+      append("#main", my_form);
+      watch("#main", "submit");
+    }
+    
   }
   rule respond_submit {
     select when web submit "#form"
