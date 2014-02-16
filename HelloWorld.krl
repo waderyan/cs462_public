@@ -24,7 +24,7 @@ ruleset HelloWorldApp {
   rule show_form {
     select when pageview
     pre {
-      replace = << <div id="main">Add to Main Div</div> >>;
+      replace = << <div id="my_main">Add to Main Div</div> >>;
       my_form = <<
         <form id="form">
           <input type="text" name="first" />
@@ -35,8 +35,8 @@ ruleset HelloWorldApp {
     }
     if(not ent:full) then {
       append("#main", replace);
-      append("#main", my_form);
-      watch("#main", "submit");
+      append("#my_main", my_form);
+      watch("#my_main", "submit");
     } 
   }
   rule respond_submit {
@@ -46,7 +46,7 @@ ruleset HelloWorldApp {
       last = event:attr("last");
       full = first + " " + last;
     }
-    replace_inner("#main", "Welcome ${full}");
+    replace_inner("#my_main", "Welcome ${full}");
     fired {
       set ent:first first;
       set ent:last last;
