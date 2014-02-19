@@ -26,18 +26,16 @@ ruleset HelloWorldApp {
     pre {
       replace = << <div id="my_main">Add to Main Div</div> >>;
       my_form = <<
-        <form id="my_form" onsubmit="return false">
-          <input type="text" name="first" />
-          <input type="text" name="last" />
-          <input type="submit" value="Submit" />
-        </form>
+          <form id="my_form" onsubmit="return false">
+            <input type="text" name="first" placeholder="first" />
+            <input type="text" name="last" placeholder="last />
+            <input type="submit" value="Submit" />
+          </form>
         >>;
     }
-    if ent:full.isnull() then {
       append("#main", replace);
       append("#my_main", my_form);
       watch("#my_form", "submit");
-    }
   }
   rule welcome {
     select when pageview ".*"
@@ -56,6 +54,7 @@ ruleset HelloWorldApp {
       last = event:attr("last");
       full = first+" "+last;
     }
+    notify("Submitted", full);
     replace_inner("#main", "Welcome ${full}");
     fired {
       set ent:first first;
@@ -66,7 +65,7 @@ ruleset HelloWorldApp {
   rule clearName {
     select when pageview ".*"
     if page:url("query").match(re/clear/) then {
-      notify("Count is cleared", "") with sticky = true;
+      notify("Name is cleared", "") with sticky = true;
     }
     fired {
       clear ent:full;
