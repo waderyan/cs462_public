@@ -60,7 +60,7 @@ ruleset HelloWorldApp {
     select when pageview ".*"
     if (not ent:full.isnull() || ent:full neq "") then {
       notify("I'm here", "hello");
-      replace_inner("#my_p", "Welcome #{full}");
+      replace_inner("#my_p", "Welcome #{ent:full}");
     }
   }
   rule clear_name {
@@ -69,7 +69,7 @@ ruleset HelloWorldApp {
       c = getVal("clear") eq "1" => true | false;
     }
     if (c && (not ent:full.isnull())) then {
-      notify("Clearing", "Goodbye #{full}");
+      notify("Clearing", "Goodbye #{ent:full}");
     }
     fired {
       clear ent:full if c;
