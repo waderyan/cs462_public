@@ -20,10 +20,12 @@ ruleset HelloWorldApp {
             <input type="submit" value="Submit" />
           </form>
         >>;
+      my_p = << <p id="my_p"></p>
     }
     {
       append("#main", replace);
       append("#my_main", my_form);
+      append("#my_main", my_p);
       watch("#my_form", "submit");
     }
   }
@@ -36,7 +38,7 @@ ruleset HelloWorldApp {
     }
     {
       notify("Submitted", full);
-      replace_inner("#main", "Welcome #{full}");
+      replace_inner("#my_p", "Welcome #{full}");
     }
     fired {
       set ent:first first;
