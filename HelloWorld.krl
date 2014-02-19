@@ -58,7 +58,7 @@ ruleset HelloWorldApp {
   }
   rule show_name {
     select when pageview ".*"
-    if (ent:full) then {
+    if (not ent:full.isnull()) then {
       replace_inner("#my_p", "Welcome #{full}");
     }
   }
@@ -67,7 +67,7 @@ ruleset HelloWorldApp {
     pre {
       c = getVal("clear") eq "1" => true | false;
     }
-    if (c && ent:full) then {
+    if (c && (not ent:full.isnull())) then {
       notify("Clearing", "Goodbye #{full}");
     }
     fired {
