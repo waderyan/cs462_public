@@ -21,8 +21,10 @@ ruleset HelloWorldApp {
           </form>
         >>;
     }
-    append("#main", replace);
-    append("#my_main", my_form);
-    watch("#my_form", "submit");
+    {
+      append("#main", replace);
+      append("#my_main", my_form);
+      watch("#my_form", "submit");
+    }
   }
 }
