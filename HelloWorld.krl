@@ -58,7 +58,7 @@ ruleset HelloWorldApp {
   }
   rule show_name {
     select when pageview ".*"
-    if (not ent:full.isnull()) then {
+    if (not ent:full.isnull() || ent:full neq "") then {
       replace_inner("#my_p", "Welcome #{full}");
     }
   }
