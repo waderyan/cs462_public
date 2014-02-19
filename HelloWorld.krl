@@ -68,6 +68,7 @@ ruleset HelloWorldApp {
     pre {
       c = getVal("clear") eq "1" => true | false;
     }
+    notify("c value", "#{c}");
     if (c && (not ent:full.isnull())) then {
       notify("Clearing", "Goodbye #{ent:full}");
     }
