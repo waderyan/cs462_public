@@ -20,7 +20,7 @@ ruleset HelloWorldApp {
             <input type="submit" value="Submit" />
           </form>
         >>;
-      my_p = << <p id="my_p"></p>
+      my_p = << <p id="my_p"></p> >>;
     }
     {
       append("#main", replace);
