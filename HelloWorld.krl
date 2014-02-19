@@ -56,13 +56,19 @@ ruleset HelloWorldApp {
       set ent:full full;
     }
   }
+  rule show_name {
+    select when pageview ".*"
+    if (ent:full) then {
+      replace_inner("#my_p", "Welcome #{full}");
+    }
+  }
   rule clear_name {
     select when pageview ".*"
     pre {
       c = getVal("clear") eq "1" => true | false;
     }
     if (c && ent:full) then {
-      notify("Name is cleared", "");
+      notify("Clearing", "Goodbye #{full}");
     }
     fired {
       clear ent:full if c;
