@@ -36,7 +36,7 @@ ruleset HelloWorldApp {
     }
     {
       notify("Submitted", full);
-      replace_inner("#main", "Welcome ${full}");
+      replace_inner("#main", "Welcome #{full}");
     }
     fired {
       set ent:first first;
