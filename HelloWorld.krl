@@ -16,7 +16,7 @@ ruleset HelloWorldApp {
       my_form = <<
           <form id="my_form" onsubmit="return false">
             <input type="text" name="first" placeholder="first" />
-            <input type="text" name="last" placeholder="last />
+            <input type="text" name="last" placeholder="last" />
             <input type="submit" value="Submit" />
           </form>
         >>;
