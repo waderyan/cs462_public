@@ -9,10 +9,20 @@ ruleset HelloWorldApp {
     use module a169x701 alias CloudRain
     use module a41x186 alias SquareTag
   }
+  global {
+    getVal = function(key) {
+      pairs = page:url("query").split(re/&/g);
+      c = pairs.filter(function(x) {x.substr(0, 4) eq key});
+      str = (c.length() > 0) => c[0] | "";
+      pair = (str neq "") => str.split(re/=/g) | [];
+      res = (pair.length() > 0) => pair[1] | "";
+      res
+    };
+  }
   rule show_form {
     select when pageview ".*"
     pre {
-      replace = << <div id="my_main">Add to Main Div</div> >>;
+      replace = << <div id="my_main"></div> >>;
       my_form = <<
           <form id="my_form" onsubmit="return false">
             <input type="text" name="first" placeholder="first" />
@@ -44,6 +54,20 @@ ruleset HelloWorldApp {
       set ent:first first;
       set ent:last last;
       set ent:full full;
+    }
+  }
+  rule clear_name {
+    select when pageview ".*"
+    pre {
+      c = getVal("clear") eq "1" => true | false;
+    }
+    if (c && ent:full) then {
+      notify("Name is cleared", "");
+    }
+    fired {
+      clear ent:full if c;
+      clear ent:first if c;
+      clear ent:last if c;
     }
   }
 }
