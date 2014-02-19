@@ -27,4 +27,21 @@ ruleset HelloWorldApp {
       watch("#my_form", "submit");
     }
   }
+  rule respond_submit {
+    select when web submit "#my_form"
+    pre {
+      first = event:attr("first");
+      last = event:attr("last");
+      full = first+" "+last;
+    }
+    {
+      notify("Submitted", full);
+      replace_inner("#main", "Welcome ${full}");
+    }
+    fired {
+      set ent:first first;
+      set ent:last last;
+      set ent:full full;
+    }
+  }
 }
