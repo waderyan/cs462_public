@@ -11,51 +11,67 @@ ruleset Lab4App {
   }
   global {
     api_key = "af5bw6yg28j8auzft5pmk2fn";
+
+    movieToHtml = function(movie) {
+      info = <<
+       <img src="#{movie.pick($.posters.thumbnail}">
+       <p><span>Title</span>: #{movie.pick("$.title")}</p>
+       <p><span>Release Year</span>: #{movie.pick("$.year")}</p>
+       <p><span>MPAA Rating</span>: #{movie.pick("$.mpaa_rating")}</p>
+       <p><span>Synopsis</span>: #{movie.pick("$.synopsis")}</p>
+       <h3>Ratings</h3>
+       <p><span>Critics Rating</span>: #{movie.pick("$.ratings.critics_rating")}</p>
+       <p><span>Audience Rating</span>: #{movie.pick("$.ratings.audience_rating")}</p>
+       <p><span>Critics Score</span>: #{movie.pick("$.ratings.critics_score")}</p>
+       <p><span>Audience Score</span>: #{movie.pick("$.ratings.audience_score")}</p>
+      >>;
+      info;
+    }
+
     getMovieInfo = function(title) {
-      result = http:get("http://api.rottentomatoes.com/api/public/v1.0/movies.json",{"apikey" : api_key, "q" : title}).pick("$.content").decode(); total = result.pick("$.total").as("num");
-      movie = <<
-       <img src="#{result.pick("$.movies[0]..thumbnail")}">
-       <p><span style="font-weight:bold;">Title</span>: #{result.pick("$.movies[0].title")}</p>
-       <p><span style="font-weight:bold;">Release Year</span>: #{result.pick("$.movies[0].year")}</p>
-       <p><span style="font-weight:bold;">Synopsis</span>: #{result.pick("$.movies[0].synopsis")}</p>
-       <p><span style="font-weight:bold;">Critics Rating</span>: #{result.pick("$.movies[0]..critics_rating")}</p>
-      >>;
+      result = http:get("http://api.rottentomatoes.com/api/public/v1.0/movies.json",
+        {
+          "apikey" : api_key, 
+          "q" : title
+        }
+      ).pick("$.content").decode(); 
       
-      error = <<
-        <p>No results found for #{title}. Please search again.</p>
+      noresult = << 
+        <p>No results for #{title}. Please try again</p> 
       >>;
-      html = (total > 0) => movie | error;
-      html;
+      ret = (result.pick("$.total").as("num") > 0) => movieToHtml(result.pick("$.movies[0]")) | noresult;
+      ret;
     }
   }
   rule Rotten {
     select when web cloudAppSelected
     pre {
-      my_html = <<
-        <div id="movie_result">
-        </div>
-        <form id="my_form" onsubmit="return false;">
-          <input type="text" name="title" placeholder="title"/>
-          <input type="submit" value="Submit" />
+      html = <<
+        <form id="movie_form" onsubmit="return false;">
+          <legend>Movie Search</legend>
+          <fieldset>
+            <input type="text" name="title" placeholder="title"/>
+            <input type="submit" value="Submit" />
+          </fieldset>
         </form>
+        <div id="movie">
+        </div>
       >>;
-
     }
     {
       SquareTag:inject_styling();
-      CloudRain:createLoadPanel("Lookup Movie", {}, my_html);
-      watch("#my_form","submit");
+      CloudRain:createLoadPanel("Lookup Movie", {}, html);
+      watch("#movie_form","submit");
     }
   }
 
   rule form_submit {
-    select when web submit "#my_form"
+    select when web submit "#movie_form"
     pre {
-      movie = event:attr("title");
-      results = getMovieInfo(movie);
+      results = getMovieInfo(event:attr("title"));
     }
     {
-      replace_inner("#movie_result",results);
+      replace_inner("#movie",results);
     }
   }
 }
