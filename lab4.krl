@@ -15,10 +15,10 @@ ruleset Lab4App {
       result = http:get("http://api.rottentomatoes.com/api/public/v1.0/movies.json",{"apikey" : api_key, "q" : title}).pick("$.content").decode(); total = result.pick("$.total").as("num");
       movie = <<
        <img src="#{results.pick("$.movies[0]..thumbnail")}">
-       <p><span style="font-weight:bold;">Title</span>: #{results.pick("$.movies[0].title")}</p>
-       <p><span style="font-weight:bold;">Release Year</span>: #{results.pick("$.movies[0].year")}</p>
-       <p><span style="font-weight:bold;">Synopsis</span>: #{results.pick("$.movies[0].synopsis")}</p>
-       <p><span style="font-weight:bold;">Critics Rating</span>: #{results.pick("$.movies[0]..critics_rating")}</p>
+       <p><span style="font-weight:bold;">Title</span>: #{result.pick("$.movies[0].title")}</p>
+       <p><span style="font-weight:bold;">Release Year</span>: #{result.pick("$.movies[0].year")}</p>
+       <p><span style="font-weight:bold;">Synopsis</span>: #{result.pick("$.movies[0].synopsis")}</p>
+       <p><span style="font-weight:bold;">Critics Rating</span>: #{result.pick("$.movies[0]..critics_rating")}</p>
       >>;
       
       error = <<
