@@ -68,7 +68,7 @@ ruleset Lab4App {
       ).pick("$.content").decode(); 
       
       noresult = << 
-        <p>No results for #{title}. Please try again</p> 
+        <p>No results for #{title}. </p> 
       >>;
       ret = (result.pick("$.total").as("num") > 0) => movieToHtml(result.pick("$.movies[0]")) | noresult;
       ret;
