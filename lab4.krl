@@ -14,7 +14,7 @@ ruleset Lab4App {
 
     movieToHtml = function(movie) {
       info = <<
-       <img src="#{movie.pick($..posters.thumbnail}">
+       <img src="#{movie.pick("$..posters.thumbnail"}">
        <p><span>Title</span>: #{movie.pick("$.title")}</p>
        <p><span>Release Year</span>: #{movie.pick("$.year")}</p>
        <p><span>MPAA Rating</span>: #{movie.pick("$.mpaa_rating")}</p>
