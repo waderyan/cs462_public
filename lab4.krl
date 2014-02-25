@@ -13,17 +13,20 @@ ruleset Lab4App {
     api_key = "af5bw6yg28j8auzft5pmk2fn";
 
     movieToHtml = function(movie) {
+      thumbnail = movie.pick("$..posters.thumbnail");
       info = <<
-       <img src="#{movie.pick("$..posters.thumbnail"}">
-       <p><span>Title</span>: #{movie.pick("$.title")}</p>
-       <p><span>Release Year</span>: #{movie.pick("$.year")}</p>
-       <p><span>MPAA Rating</span>: #{movie.pick("$.mpaa_rating")}</p>
-       <p><span>Synopsis</span>: #{movie.pick("$.synopsis")}</p>
-       <h4>Rotten's Review</h4>
-       <p><span>Critics Rating</span>: #{movie.pick("$.ratings.critics_rating")}</p>
-       <p><span>Audience Rating</span>: #{movie.pick("$.ratings.audience_rating")}</p>
-       <p><span>Critics Score</span>: #{movie.pick("$.ratings.critics_score")}</p>
-       <p><span>Audience Score</span>: #{movie.pick("$.ratings.audience_score")}</p>
+       <div style="margin: 20px;">
+         <img src="#{thumbnail}">
+         <p><span>Title</span>: #{movie.pick("$.title")}</p>
+         <p><span>Release Year</span>: #{movie.pick("$.year")}</p>
+         <p><span>MPAA Rating</span>: #{movie.pick("$.mpaa_rating")}</p>
+         <p><span>Synopsis</span>: #{movie.pick("$.synopsis")}</p>
+         <h4>Rotten's Review</h4>
+         <p><span>Critics Rating</span>: #{movie.pick("$.ratings.critics_rating")}</p>
+         <p><span>Audience Rating</span>: #{movie.pick("$.ratings.audience_rating")}</p>
+         <p><span>Critics Score</span>: #{movie.pick("$.ratings.critics_score")}</p>
+         <p><span>Audience Score</span>: #{movie.pick("$.ratings.audience_score")}</p>
+       </div>
       >>;
       info;
     }
@@ -47,7 +50,7 @@ ruleset Lab4App {
     select when web cloudAppSelected
     pre {
       html = <<
-        <form id="movie_form" onsubmit="return false;">
+        <form style="margin: 20px;" id="movie_form" onsubmit="return false;">
           <legend>Movie Search</legend>
           <fieldset>
             <input type="text" name="title" placeholder="title"/>
