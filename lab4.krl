@@ -14,41 +14,43 @@ ruleset Lab4App {
 
     movieToHtml = function(movie) {
       thumbnail = movie.pick("$..posters.original");
+
+      tdStyle = "padding: 10px;";
       info = <<
        <img style="float: right; margin-right: 50px; width: 250px; height: 250px;" src="#{thumbnail}">
        <div style="margin: 20px; padding: 10px;">
          <table style="border: none;">
             <tr>
-                <td><span>Title</span></td>
-                <td><span>#{movie.pick("$.title")}</span></td>
+                <td style="#{tdStyle}"><span>Title</span></td>
+                <td style="#{tdStyle}"><span>#{movie.pick("$.title")}</span></td>
             </tr>
              <tr>
-                <td><span>Release Year</span></td>
-                <td><span>#{movie.pick("$.year")}</span></td>
+                <td style="#{tdStyle}"><span>Release Year</span></td>
+                <td style="#{tdStyle}"><span>#{movie.pick("$.year")}</span></td>
             </tr>
              <tr>
-                <td><span>MPAA Rating</span></td>
-                <td><span>#{movie.pick("$.mpaa_rating")}</span></td>
+                <td style="#{tdStyle}"><span>MPAA Rating</span></td>
+                <td style="#{tdStyle}"><span>#{movie.pick("$.mpaa_rating")}</span></td>
             </tr>
              <tr>
-                <td><span>Runtime</span></td>
-                <td><span>#{movie.pick("$.runtime")}</span></td>
+                <td style="#{tdStyle}"><span>Runtime</span></td>
+                <td style="#{tdStyle}"><span>#{movie.pick("$.runtime")}</span></td>
             </tr>
             <tr>
-                <td><span>Critics Rating</span></td>
-                <td><span>#{movie.pick("$.ratings.critics_rating")}</span></td>
+                <td style="#{tdStyle}"><span>Critics Rating</span></td>
+                <td style="#{tdStyle}"><span>#{movie.pick("$.ratings.critics_rating")}</span></td>
             </tr>
              <tr>
-                <td><span>Audience Rating</span></td>
-                <td><span>#{movie.pick("$.ratings.audience_rating")}</span></td>
+                <td style="#{tdStyle}"><span>Audience Rating</span></td>
+                <td style="#{tdStyle}"><span>#{movie.pick("$.ratings.audience_rating")}</span></td>
             </tr>
              <tr>
-                <td><span>Critics Score</span></td>
-                <td><span>#{movie.pick("$.ratings.critics_score")}</span></td>
+                <td style="#{tdStyle}"><span>Critics Score</span></td>
+                <td style="#{tdStyle}"><span>#{movie.pick("$.ratings.critics_score")}</span></td>
             </tr>
              <tr>
-                <td><span>Audience Score</span></td>
-                <td><span>#{movie.pick("$.ratings.audience_score")}</span></td>
+                <td style="#{tdStyle}"><span>Audience Score</span></td>
+                <td style="#{tdStyle}"><span>#{movie.pick("$.ratings.audience_score")}</span></td>
             </tr>
          </table>
          <p><span>Synopsis</span>: #{movie.pick("$.synopsis")}</p>
