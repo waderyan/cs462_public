@@ -13,10 +13,10 @@ ruleset Lab4App {
     api_key = "af5bw6yg28j8auzft5pmk2fn";
 
     movieToHtml = function(movie) {
-      thumbnail = movie.pick("$..posters.thumbnail");
+      thumbnail = movie.pick("$..posters.original");
       info = <<
        <div style="margin: 20px;">
-         <img src="#{thumbnail}">
+         <img style="float: right; margin-right: 50px; width: 250px; height: 250px;" src="#{thumbnail}">
          <p><span>Title</span>: #{movie.pick("$.title")}</p>
          <p><span>Release Year</span>: #{movie.pick("$.year")}</p>
          <p><span>MPAA Rating</span>: #{movie.pick("$.mpaa_rating")}</p>
@@ -53,8 +53,10 @@ ruleset Lab4App {
         <form style="margin: 20px;" id="movie_form" onsubmit="return false;">
           <legend>Movie Search</legend>
           <fieldset>
-            <input type="text" name="title" placeholder="title"/>
-            <input type="submit" value="Submit" />
+            <input type="text" name="title" placeholder="Movie Title"/>
+          </fieldset>
+          <fieldset>
+            <input type="submit" value="Search" />
           </fieldset>
         </form>
         <div id="movie">
