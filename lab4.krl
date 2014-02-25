@@ -20,8 +20,8 @@ ruleset Lab4App {
          <p><span>Title</span>: #{movie.pick("$.title")}</p>
          <p><span>Release Year</span>: #{movie.pick("$.year")}</p>
          <p><span>MPAA Rating</span>: #{movie.pick("$.mpaa_rating")}</p>
+         <p><span>Runtime</span>: #{movie.pick("$.runtime")}</p>
          <p><span>Synopsis</span>: #{movie.pick("$.synopsis")}</p>
-         <h4>Rotten's Review</h4>
          <p><span>Critics Rating</span>: #{movie.pick("$.ratings.critics_rating")}</p>
          <p><span>Audience Rating</span>: #{movie.pick("$.ratings.audience_rating")}</p>
          <p><span>Critics Score</span>: #{movie.pick("$.ratings.critics_score")}</p>
