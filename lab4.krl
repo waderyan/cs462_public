@@ -15,8 +15,8 @@ ruleset Lab4App {
     movieToHtml = function(movie) {
       thumbnail = movie.pick("$..posters.original");
       info = <<
-       <div style="margin: 20px;">
-         <img style="float: right; margin-right: 50px; width: 250px; height: 250px;" src="#{thumbnail}">
+       <img style="float: right; margin-right: 50px; width: 250px; height: 250px;" src="#{thumbnail}">
+       <div style="margin: 20px; padding: 10px;">
          <p><span>Title</span>: #{movie.pick("$.title")}</p>
          <p><span>Release Year</span>: #{movie.pick("$.year")}</p>
          <p><span>MPAA Rating</span>: #{movie.pick("$.mpaa_rating")}</p>
