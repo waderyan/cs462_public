@@ -9,21 +9,53 @@ ruleset Lab4App {
     use module a169x701 alias CloudRain
     use module a41x186 alias SquareTag
   }
-  dispatch {
-
-  }
   global {
     api_key = "af5bw6yg28j8auzft5pmk2fn";
-    movies = function() {
-      result = http:get("http://api.rottentomatoes.com/api/public/v1.0.json", {"apikey" : api_key});
-      body = result.pick("$.content");
-      body
+    getMovieInfo = function(title) {
+      result = http:get("http://api.rottentomatoes.com/api/public/v1.0.json",{"apikey" : api_key, "q" : title}).pick("$.content").decode(); total = result.pick("$.total").as("num");
+      movie = <<
+       <img src="#{results.pick("$.movies[0]..thumbnail")}">
+       <p><span style="font-weight:bold;">Title</span>: #{results.pick("$.movies[0].title")}</p>
+       <p><span style="font-weight:bold;">Release Year</span>: #{results.pick("$.movies[0].year")}</p>
+       <p><span style="font-weight:bold;">Synopsis</span>: #{results.pick("$.movies[0].synopsis")}</p>
+       <p><span style="font-weight:bold;">Critics Rating</span>: #{results.pick("$.movies[0]..critics_rating")}</p>
+      >>;
+      
+      error = <<
+        <p>No results found for #{title}. Please search again.</p>
+      >>;
+      html = (total > 0) => movie | error;
+      html;
     }
   }
-  rule obtain_rating {
-    select when pageview url re#imbd# and pageview url re#/title/tt\d+# setting (movie_id)
+  rule Rotten {
+    select when web cloudAppSelected
+    pre {
+      my_html = <<
+        <div id="movie_result" style="width:500px; margin:auto;">
+        </div>
+        <form id="my_form" onsubmit="return false;">
+          <input type="text" name="title" placeholder="Movie Title"/>
+          <input type="submit" value="Submit" />
+        </form>
+      >>;
+
+    }
     {
-      notify("Movie", movie_id);
+      SquareTag:inject_styling();
+      CloudRain:createLoadPanel("Lookup Movie", {}, my_html);
+      watch("#my_form","submit");
+    }
+  }
+
+  rule form_submit {
+    select when web submit "#my_form"
+    pre {
+      movie = event:attr("title");
+      results = getMovieInfo(movie);
+    }
+    {
+      replace_inner("#movie_result",results);
     }
   }
 }
