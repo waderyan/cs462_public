@@ -78,8 +78,9 @@ ruleset Lab4App {
     select when web cloudAppSelected
     pre {
       html = <<
+        <div id="movie">
+        </div>
         <form style="margin: 20px;" id="movie_form" onsubmit="return false;">
-          <legend>Movie Search</legend>
           <fieldset>
             <input type="text" name="title" placeholder="Movie Title"/>
           </fieldset>
@@ -87,8 +88,6 @@ ruleset Lab4App {
             <input type="submit" value="Search" />
           </fieldset>
         </form>
-        <div id="movie">
-        </div>
       >>;
     }
     {
