@@ -17,15 +17,41 @@ ruleset Lab4App {
       info = <<
        <img style="float: right; margin-right: 50px; width: 250px; height: 250px;" src="#{thumbnail}">
        <div style="margin: 20px; padding: 10px;">
-         <p><span>Title</span>: #{movie.pick("$.title")}</p>
-         <p><span>Release Year</span>: #{movie.pick("$.year")}</p>
-         <p><span>MPAA Rating</span>: #{movie.pick("$.mpaa_rating")}</p>
-         <p><span>Runtime</span>: #{movie.pick("$.runtime")}</p>
+         <table style="border: none;">
+            <tr>
+                <td><span>Title</span></td>
+                <td><span>#{movie.pick("$.title")}</span></td>
+            </tr>
+             <tr>
+                <td><span>Release Year</span></td>
+                <td><span>#{movie.pick("$.year")}</span></td>
+            </tr>
+             <tr>
+                <td><span>MPAA Rating</span></td>
+                <td><span>#{movie.pick("$.mpaa_rating")}</span></td>
+            </tr>
+             <tr>
+                <td><span>Runtime</span></td>
+                <td><span>#{movie.pick("$.runtime")}</span></td>
+            </tr>
+            <tr>
+                <td><span>Critics Rating</span></td>
+                <td><span>#{movie.pick("$.ratings.critics_rating")}</span></td>
+            </tr>
+             <tr>
+                <td><span>Audience Rating</span></td>
+                <td><span>#{movie.pick("$.ratings.audience_rating")}</span></td>
+            </tr>
+             <tr>
+                <td><span>Critics Score</span></td>
+                <td><span>#{movie.pick("$.ratings.critics_score")}</span></td>
+            </tr>
+             <tr>
+                <td><span>Audience Score</span></td>
+                <td><span>#{movie.pick("$.ratings.audience_score")}</span></td>
+            </tr>
+         </table>
          <p><span>Synopsis</span>: #{movie.pick("$.synopsis")}</p>
-         <p><span>Critics Rating</span>: #{movie.pick("$.ratings.critics_rating")}</p>
-         <p><span>Audience Rating</span>: #{movie.pick("$.ratings.audience_rating")}</p>
-         <p><span>Critics Score</span>: #{movie.pick("$.ratings.critics_score")}</p>
-         <p><span>Audience Score</span>: #{movie.pick("$.ratings.audience_score")}</p>
        </div>
       >>;
       info;
