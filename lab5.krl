@@ -8,11 +8,14 @@ ruleset foursquare {
     logging off
     use module a169x701 alias CloudRain
     use module a41x186 alias SquareTag
+    // b505194x3.prod 
+    // 31AFDBBA-A3B9-11E3-A94B-E895FCD408FB
+    // curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "checkin={'venue':{'name':'test venue', 'city':'Provo'}, 'shout':'shouting', 'createdAt':'today'}&_rids=b505194x3" http://cs.kobj.net/sky/event/31AFDBBA-A3B9-11E3-A94B-E895FCD408FB/1/foursquare/checkin
   }
   global {
     checkinToHtml = function() {
         info = <<
-          <div>
+          <div style="margin: 20px">
             <h2>Foursquare Checkin Information</h2>
             <ul>
               <li><span>Venue: #{ent:venue}</span></li>
