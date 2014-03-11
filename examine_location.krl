@@ -32,7 +32,7 @@ ruleset examine_location {
     select when web cloudAppSelected
     {
         SquareTag:inject_styling();
-        CloudRain:createLoadPanel("Foursquare Checkin Information", {}, checkinToHtml(location_data:get_location_data("fs_checkin"));       
+        CloudRain:createLoadPanel("Foursquare Checkin Information", {}, checkinToHtml(location_data:get_location_data("fs_checkin")));       
         emit <<
           console.log("show_fs_location")
         >>;

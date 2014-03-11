@@ -11,7 +11,6 @@ ruleset location_data {
     provides get_location_data
   }
   global {
-    set app:mymap = {};
     get_location_data = function(key) {
       res = app:mymap(key);
       res;
@@ -20,17 +19,14 @@ ruleset location_data {
   rule add_location_item {
     select when pds new_location_data
     pre {
-      k = event:attr("key")
-      v = event:attr("value")
+      newmap = app:mymap || {};
+      k = event:attr("key");
+      v = event:attr("value");
+      newmap = newmap.put(k,v);
     }
-    {
-      send_directive(k) with location = v
-      emit <<
-          console.log("add_location_item")
-        >>;
-    }
-    fired {
-        app:mymap.put({k, v});
+    send_directive(k) with location = v;
+    always {
+        set app:mymap newmap;
     }
   }
 }
