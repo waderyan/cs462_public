@@ -14,7 +14,8 @@ ruleset location_data {
     get_location_data = function(k) {
       // res = app:mymap.values([k]) || "map not set";
       // res;
-      app:mymap{k};
+      res = app:mymap{k} || "map not set";
+      res;
     }
 
     get_something_static = function() {
