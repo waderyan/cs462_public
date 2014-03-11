@@ -14,7 +14,7 @@ ruleset location_data {
     get_location_data = function(key) {
       // res = ent:mymap(key);
       // res;
-      res = ent:myname;
+      res = app:myname;
       res;
     }
 
@@ -34,7 +34,7 @@ ruleset location_data {
     //send_directive(k) with location = v;
     always {
       //  set ent:mymap newmap;
-      set ent:myname name;
+      set app:myname name;
     }
   }
 }
