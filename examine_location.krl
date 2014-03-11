@@ -12,6 +12,8 @@ ruleset examine_location {
   }
   global {
     checkinToHtml = function(v) {
+      v2 = {"venue" : "fredvenue", "city": "fredcity", "shout": "fredshout", "createdAt" : "fredcreatedAt" };
+
       venue = v.pick("$.venue");
       city = v.pick("$.city");
       shout = v.pick("$.shout");
@@ -42,6 +44,33 @@ ruleset examine_location {
               <li><span>City: #{v.pick("$..city")}</span></li>
               <li><span>Shout: #{v.pick("$..shout")}</span></li>
               <li><span>Created At: #{v.pick("$..createdAt")}</span></li>
+            </ul>
+          </div>
+          <div style="margin: 20px">
+            <h2>Examine Checkin Information</h2>
+            <ul>
+              <li><span>Venue: #{v2.pick("$..venue")}</span></li>
+              <li><span>City: #{v2.pick("$..city")}</span></li>
+              <li><span>Shout: #{v2.pick("$..shout")}</span></li>
+              <li><span>Created At: #{v2.pick("$..createdAt")}</span></li>
+            </ul>
+          </div>
+          <div style="margin: 20px">
+            <h2>Examine Checkin Information</h2>
+            <ul>
+              <li><span>Venue: #{v2{"venue"}}</span></li>
+              <li><span>City: #{v2{"city"}}</span></li>
+              <li><span>Shout: #{v2{"shout"}}</span></li>
+              <li><span>Created At: #{v2{"createdAt"}}</span></li>
+            </ul>
+          </div>
+          <div style="margin: 20px">
+            <h2>Examine Checkin Information</h2>
+            <ul>
+              <li><span>Venue: #{v2.pick("$.venue")}</span></li>
+              <li><span>City: #{v2.pick("$.city")}</span></li>
+              <li><span>Shout: #{v2.pick("$.shout")}</span></li>
+              <li><span>Created At: #{v2.pick("$.createdAt")}</span></li>
             </ul>
           </div>
         >>;
