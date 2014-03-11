@@ -12,10 +12,10 @@ ruleset location_data {
   }
   global {
     get_location_data = function(key) {
-      // res = ent:mymap(key);
-      // res;
-      res = app:myname || "notset";
+      res = ent:mymap(key);
       res;
+      //res = app:myname || "notset";
+      //res;
     }
 
     get_something_static = function() {
@@ -25,16 +25,15 @@ ruleset location_data {
   rule add_location_item {
     select when pds new_location_data
     pre {
-      name = event:attr("test");
-    //  newmap = ent:mymap || {};
-    //  k = event:attr("key");
-    //  v = event:attr("value");
-    //  newmap = newmap.put([k],v);
+    //  name = event:attr("test");
+      newmap = ent:mymap || {};
+      k = event:attr("key");
+      v = event:attr("value");
     }
     //send_directive(k) with location = v;
     always {
-      //  set ent:mymap newmap;
-      set app:myname name;
+        set ent:mymap newmap.put([k],v);
+      //set app:myname name;
     }
   }
 }
