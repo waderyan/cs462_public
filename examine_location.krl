@@ -12,15 +12,15 @@ ruleset examine_location {
     use module b505194x4 alias location_data
   }
   global {
-    checkinToHtml = function(val) {
+    checkinToHtml = function(info) {
         info = <<
           <div style="margin: 20px">
             <h2>Examine Checkin Information</h2>
             <ul>
-              <li><span>Venue: #{val.pick("$.venue")}</span></li>
-              <li><span>City: #{val.pick("$.city")}</span></li>
-              <li><span>Shout: #{val.pick("$.shout")}</span></li>
-              <li><span>Created At: #{val.pick("$.createdAt")}</span></li>
+              <li><span>Venue: #{info.pick("$.venue")}</span></li>
+              <li><span>City: #{info.pick("$.city")}</span></li>
+              <li><span>Shout: #{info.pick("$.shout")}</span></li>
+              <li><span>Created At: #{info.pick("$.createdAt")}</span></li>
             </ul>
           </div>
         >>;

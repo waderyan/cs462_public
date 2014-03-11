@@ -12,23 +12,25 @@ ruleset location_data {
   }
   global {
     get_location_data = function(key) {
-       res = ent:mymap(key);
-       res;
-    // "I am in get_location_data";
+      // res = ent:mymap(key);
+      // res;
+      // "I am in get_location_data";
+      ent:myname;
     }
   }
   rule add_location_item {
     select when pds new_location_data
     pre {
-      newmap = ent:mymap || {};
-      k = event:attr("key");
-      v = event:attr("value");
-      newmap = newmap.put(k,v);
+      name = event:attr("test");
+    //  newmap = ent:mymap || {};
+    //  k = event:attr("key");
+    //  v = event:attr("value");
+    //  newmap = newmap.put(k,v);
     }
-    notify("map", newmap);
     send_directive(k) with location = v;
     always {
-        set ent:mymap newmap;
+      //  set ent:mymap newmap;
+      set ent:myname name;
     }
   }
 }
