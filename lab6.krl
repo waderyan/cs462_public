@@ -29,7 +29,8 @@ ruleset location_data {
     select when pds new_location_data
     pre {
       name = event:attr("test");
-      newmap = app:mymap || {};
+      // newmap = app:mymap || {};
+      newmap = {};
       k = event:attr("key");
       v = event:attr("value");
     }
