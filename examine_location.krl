@@ -17,10 +17,10 @@ ruleset examine_location {
           <div style="margin: 20px">
             <h2>Examine Checkin Information</h2>
             <ul>
-              <li><span>Venue: #{info.pick("$..venue")}</span></li>
-              <li><span>City: #{info.pick("$..city")}</span></li>
-              <li><span>Shout: #{info.pick("$..shout")}</span></li>
-              <li><span>Created At: #{info.pick("$..createdAt")}</span></li>
+              <li><span>Venue: #{info.pick("$.venue")}</span></li>
+              <li><span>City: #{info.pick("$.city")}</span></li>
+              <li><span>Shout: #{info.pick("$.shout")}</span></li>
+              <li><span>Created At: #{info.pick("$.createdAt")}</span></li>
             </ul>
           </div>
         >>;
