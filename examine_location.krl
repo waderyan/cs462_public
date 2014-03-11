@@ -17,10 +17,10 @@ ruleset examine_location {
           <div style="margin: 20px">
             <h2>Examine Checkin Information</h2>
             <ul>
-              <li><span>Venue: #{val{venue}}</span></li>
-              <li><span>City: #{val{city}}</span></li>
-              <li><span>Shout: #{val{shout}}</span></li>
-              <li><span>Created At: #{val{createdAt}}</span></li>
+              <li><span>Venue: #{val(venue)}</span></li>
+              <li><span>City: #{val(city)}</span></li>
+              <li><span>Shout: #{val(shout)}</span></li>
+              <li><span>Created At: #{val(createdAt)}</span></li>
             </ul>
           </div>
         >>;
@@ -32,6 +32,7 @@ ruleset examine_location {
     select when web cloudAppSelected
     {
         SquareTag:inject_styling();
+        notify("hello", location_data:get_location_data("fs_checkin"));
         CloudRain:createLoadPanel("Foursquare Checkin Information", {}, checkinToHtml(location_data:get_location_data("fs_checkin")));       
         emit <<
           console.log("show_fs_location")
