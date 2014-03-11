@@ -33,7 +33,7 @@ ruleset examine_location {
     {
         SquareTag:inject_styling();
         notify("hello", location_data:get_location_data("fs_checkin"));
-        notify("static", location_data:get_something_static);
+        notify("static", location_data:get_something_static());
         CloudRain:createLoadPanel("Examine Information", {}, checkinToHtml(location_data:get_location_data("fs_checkin")));       
         emit <<
           console.log("show_fs_location")
