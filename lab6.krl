@@ -12,9 +12,9 @@ ruleset location_data {
   }
   global {
     get_location_data = function(key) {
-     // res = app:mymap(key);
-     // res;
-     "I am in get_location_data";
+       res = app:mymap(key);
+       res;
+    // "I am in get_location_data";
     }
   }
   rule add_location_item {
