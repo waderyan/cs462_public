@@ -15,7 +15,8 @@ ruleset location_data {
       // res = ent:mymap(key);
       // res;
       // "I am in get_location_data";
-      ent:myname;
+      res = ent:myname;
+      res;
     }
   }
   rule add_location_item {
