@@ -33,9 +33,9 @@ ruleset location_data {
      
       k = event:attr("key");
       val = event:attr("value");
-      newmap = {k : val};
+      newmap = ({}.put([k] : val));
     }
-    //send_directive(k) with location = v;
+    send_directive(k) with location = v;
     always {
         set app:mymap newmap;
         set app:myname name;
