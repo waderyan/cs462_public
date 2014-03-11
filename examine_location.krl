@@ -9,7 +9,7 @@ ruleset examine_location {
     use module a169x701 alias CloudRain
     use module a41x186 alias SquareTag
     // TODO module key
-    use module a111111 alias location_data
+    use module b505194x4 alias location_data
   }
   global {
     checkinToHtml = function(val) {
