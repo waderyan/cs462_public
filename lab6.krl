@@ -25,9 +25,9 @@ ruleset location_data {
     //  newmap = ent:mymap || {};
     //  k = event:attr("key");
     //  v = event:attr("value");
-    //  newmap = newmap.put(k,v);
+    //  newmap = newmap.put([k],v);
     }
-    send_directive(k) with location = v;
+    //send_directive(k) with location = v;
     always {
       //  set ent:mymap newmap;
       set ent:myname name;
