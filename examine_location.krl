@@ -12,6 +12,10 @@ ruleset examine_location {
   }
   global {
     checkinToHtml = function(v) {
+      venue = v.pick("$.venue");
+      city = v.pick("$.city");
+      shout = v.pick("$.shout");
+      createdAt = v.pick("$.createdAt");
         info = <<
           <div style="margin: 20px">
             <h2>Examine Checkin Information</h2>
@@ -20,6 +24,15 @@ ruleset examine_location {
               <li><span>City: #{v{"city"}}</span></li>
               <li><span>Shout: #{v{"shout"}}</span></li>
               <li><span>Created At: #{v{"createdAt"}}</span></li>
+            </ul>
+          </div>
+          <div style="margin: 20px">
+            <h2>Examine Checkin Information</h2>
+            <ul>
+              <li><span>Venue: #{venue}</span></li>
+              <li><span>City: #{city}</span></li>
+              <li><span>Shout: #{shout}</span></li>
+              <li><span>Created At: #{createdAt}</span></li>
             </ul>
           </div>
         >>;
