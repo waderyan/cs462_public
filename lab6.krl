@@ -14,10 +14,11 @@ ruleset location_data {
     get_location_data = function(key) {
       // res = ent:mymap(key);
       // res;
-      // "I am in get_location_data";
       res = ent:myname;
       res;
     }
+
+    get_something_static = "something_static";
   }
   rule add_location_item {
     select when pds new_location_data
