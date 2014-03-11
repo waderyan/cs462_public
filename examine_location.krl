@@ -22,15 +22,6 @@ ruleset examine_location {
           <div style="margin: 20px">
             <h2>Examine Checkin Information</h2>
             <ul>
-              <li><span>Venue: #{v{"venue"}}</span></li>
-              <li><span>City: #{v{"city"}}</span></li>
-              <li><span>Shout: #{v{"shout"}}</span></li>
-              <li><span>Created At: #{v{"createdAt"}}</span></li>
-            </ul>
-          </div>
-          <div style="margin: 20px">
-            <h2>Examine Checkin Information</h2>
-            <ul>
               <li><span>Venue: #{venue}</span></li>
               <li><span>City: #{city}</span></li>
               <li><span>Shout: #{shout}</span></li>
@@ -53,15 +44,6 @@ ruleset examine_location {
               <li><span>City: #{v2.pick("$..city")}</span></li>
               <li><span>Shout: #{v2.pick("$..shout")}</span></li>
               <li><span>Created At: #{v2.pick("$..createdAt")}</span></li>
-            </ul>
-          </div>
-          <div style="margin: 20px">
-            <h2>Examine Checkin Information</h2>
-            <ul>
-              <li><span>Venue: #{v2{"venue"}}</span></li>
-              <li><span>City: #{v2{"city"}}</span></li>
-              <li><span>Shout: #{v2{"shout"}}</span></li>
-              <li><span>Created At: #{v2{"createdAt"}}</span></li>
             </ul>
           </div>
           <div style="margin: 20px">
