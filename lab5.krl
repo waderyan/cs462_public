@@ -49,7 +49,7 @@ ruleset foursquare {
         set ent:shout shout;
         set ent:createdAt createdAt;
 
-        notify("rule fired!", "process_fs_checkin");
+       // notify("rule fired!", "process_fs_checkin");
        // raise pds event new_location_data with key = "fs_checkin" and value = {"venue" : venue, "city": city, "shout": shout, "createdAt" : createdAt };
         raise pds event new_location_data with test = "wade";
     }
