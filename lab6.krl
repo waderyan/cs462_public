@@ -11,8 +11,8 @@ ruleset location_data {
     provides get_location_data, get_something_static
   }
   global {
-    get_location_data = function(key) {
-      res = ent:mymap(key);
+    get_location_data = function(k) {
+      res = ent:mymap{k};
       res;
       //res = app:myname || "notset";
       //res;
