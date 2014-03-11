@@ -18,7 +18,9 @@ ruleset location_data {
       res;
     }
 
-    get_something_static = "something_static";
+    get_something_static = function() {
+      "something_static";
+    }
   }
   rule add_location_item {
     select when pds new_location_data
