@@ -32,10 +32,10 @@ ruleset examine_location {
     select when web cloudAppSelected
     {
         SquareTag:inject_styling();
-        notify("LOCATION_DATA", location_data:get_location_data("fs_checkin"));
+       // notify("LOCATION_DATA", location_data:get_location_data("fs_checkin"));
         notify("TEST_DATA", location_data:get_test());
         notify("STATIC_DATA", location_data:get_something_static());
-        CloudRain:createLoadPanel("Inspector", {}, checkinToHtml(location_data:get_location_data("fs_checkin")));       
+       // CloudRain:createLoadPanel("Inspector", {}, checkinToHtml(location_data:get_location_data("fs_checkin")));       
         emit <<
           console.log("show_fs_location")
         >>;
