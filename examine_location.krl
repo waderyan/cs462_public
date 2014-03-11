@@ -8,7 +8,6 @@ ruleset examine_location {
     logging off
     use module a169x701 alias CloudRain
     use module a41x186 alias SquareTag
-    // TODO module key
     use module b505194x4 alias location_data
   }
   global {
@@ -17,10 +16,10 @@ ruleset examine_location {
           <div style="margin: 20px">
             <h2>Examine Checkin Information</h2>
             <ul>
-              <li><span>Venue: #{v.values("venue")}</span></li>
-              <li><span>City: #{v.values("city")}</span></li>
-              <li><span>Shout: #{v.values("shout")}</span></li>
-              <li><span>Created At: #{v.values("createdAt")}</span></li>
+              <li><span>Venue: #{v{"venue"}}</span></li>
+              <li><span>City: #{v{"city"}}</span></li>
+              <li><span>Shout: #{v{"shout"}}</span></li>
+              <li><span>Created At: #{v{"createdAt"}}</span></li>
             </ul>
           </div>
         >>;
