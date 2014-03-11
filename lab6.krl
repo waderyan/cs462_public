@@ -14,7 +14,7 @@ ruleset location_data {
     get_location_data = function(key) {
       // res = ent:mymap(key);
       // res;
-      res = app:myname;
+      res = app:myname || "notset";
       res;
     }
 
