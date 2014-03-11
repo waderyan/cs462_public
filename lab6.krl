@@ -8,7 +8,7 @@ ruleset location_data {
     logging off
     use module a169x701 alias CloudRain
     use module a41x186 alias SquareTag
-    provides get_location_data, get_something_static
+    provides get_location_data, get_something_static, get_test
   }
   global {
     get_location_data = function(k) {
