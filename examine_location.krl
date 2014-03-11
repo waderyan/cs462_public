@@ -17,10 +17,10 @@ ruleset examine_location {
           <div style="margin: 20px">
             <h2>Examine Checkin Information</h2>
             <ul>
-              <li><span>Venue: #{info.pick("$.venue")}</span></li>
-              <li><span>City: #{info.pick("$.city")}</span></li>
-              <li><span>Shout: #{info.pick("$.shout")}</span></li>
-              <li><span>Created At: #{info.pick("$.createdAt")}</span></li>
+              <li><span>Venue: #{info.pick("$..venue")}</span></li>
+              <li><span>City: #{info.pick("$..city")}</span></li>
+              <li><span>Shout: #{info.pick("$..shout")}</span></li>
+              <li><span>Created At: #{info.pick("$..createdAt")}</span></li>
             </ul>
           </div>
         >>;
@@ -34,7 +34,7 @@ ruleset examine_location {
         SquareTag:inject_styling();
         notify("LOCATION_DATA", location_data:get_location_data("fs_checkin"));
         notify("TEST_DATA", location_data:get_test());
-        notify("static", location_data:get_something_static());
+        notify("STATIC_DATA", location_data:get_something_static());
         CloudRain:createLoadPanel("Inspector", {}, checkinToHtml(location_data:get_location_data("fs_checkin")));       
         emit <<
           console.log("show_fs_location")
