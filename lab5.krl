@@ -10,7 +10,7 @@ ruleset foursquare {
     use module a41x186 alias SquareTag
     // b505194x3.prod 
     // 31AFDBBA-A3B9-11E3-A94B-E895FCD408FB
-    // curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "checkin={'venue':{'name':'test venue', 'city':'Provo'}, 'shout':'shouting', 'createdAt':'today'}&_rids=b505194x3" http://cs.kobj.net/sky/event/31AFDBBA-A3B9-11E3-A94B-E895FCD408FB/1/foursquare/checkin
+    // curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "checkin={'venue':{'name':'test venue', 'location' : {city':'Provo'}}, 'shout':'shouting', 'createdAt':1394122605}&_rids=b505194x3" http://cs.kobj.net/sky/event/31AFDBBA-A3B9-11E3-A94B-E895FCD408FB/1/foursquare/checkin
   }
   global {
     checkinToHtml = function() {
@@ -38,6 +38,7 @@ ruleset foursquare {
       createdAt = c.pick("$.createdAt").as("num");
     }
     {
+      send_directive(venue) with checkin = venue
       emit <<
           console.log("foursquare checkin")
         >>;
@@ -47,6 +48,8 @@ ruleset foursquare {
         set ent:city city;
         set ent:shout shout;
         set ent:createdAt createdAt;
+
+        raise pds event new_location_data with key = "fs_checkin" and value = {"venue" : venue, "city": city, "shout": shout, "createdAt" : createdAt }
     }
   }
 
