@@ -11,14 +11,13 @@ ruleset lab7 {
     use module b505194x4 alias location_data
     // ID:881B7F00-AE35-11E3-8D4F-E906293232C8
     // b505194x6.prod
-    // curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "value={'lat': 40.2503479550969, 'long': -111.652357578278}&_rids=b505194x6" https://cs.kobj.net/sky/event/881B7F00-AE35-11E3-8D4F-E906293232C8/1/location/cur
+    // curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "lat=40.2503479550969&long=-111.652357578278&_rids=b505194x6" https://cs.kobj.net/sky/event/881B7F00-AE35-11E3-8D4F-E906293232C8/1/location/cur
     // 
     // https://cs.kobj.net/sky/event/881B7F00-AE35-11E3-8D4F-E906293232C8/1/location/cur?_rids=b505194x6
 
     // Questions:
     // 1) how do I raise this event? - where do I put the above url?
-    // 2) why am I getting an http error for this rule set on validation?
-    // 3) is this how to do an if - else?
+    // 2) is this how to do an if - else?
   }
   global {
   	dist = function(xa, ya, xb, yb) {
@@ -49,12 +48,10 @@ ruleset lab7 {
       d = dist(lata, longa, latb, longb);
       threshold = 50; // arbitrarily set
     }
-    {
-      send_directive("it worked") with distance = d;
+    send_directive(lata) with longitude = longa and latitude = lata and distance = d;
       //if (d < threshold) then {
       //  notify("hello", "select when location current is within threshold");
       //} 
-    }
     fired {
       raise location event nearby for b505194x7 with distance = d;
     }
