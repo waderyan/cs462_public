@@ -13,7 +13,6 @@ ruleset lab7 {
     // b505194x6.prod
     // https://cs.kobj.net/sky/event/881B7F00-AE35-11E3-8D4F-E906293232C8/1/location/current?_rids=b505194x6
 
-
     // Questions:
     // 1) how do I raise this event? - where do I put the above url?
     // 2) why am I getting an http error for this rule set on validation?

@@ -30,7 +30,6 @@ ruleset examine_location {
     }
   }
   rule show_fs_location {
-    // TODO not sure if this is right
     select when web cloudAppSelected
     {
         SquareTag:inject_styling();
