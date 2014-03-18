@@ -11,21 +11,24 @@ ruleset lab7 {
     use module b505194x4 alias location_data
     // ID:881B7F00-AE35-11E3-8D4F-E906293232C8
     // b505194x6.prod
+    // curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "value={'venue':{'name':'test venue', 'location' : {city':'Provo'}}, 'shout':'shouting', 'createdAt':1394122605}&_rids=b505194x6" https://cs.kobj.net/sky/event/881B7F00-AE35-11E3-8D4F-E906293232C8/1/location/current
+    // 
     // https://cs.kobj.net/sky/event/881B7F00-AE35-11E3-8D4F-E906293232C8/1/location/current?_rids=b505194x6
 
     // Questions:
     // 1) how do I raise this event? - where do I put the above url?
     // 2) why am I getting an http error for this rule set on validation?
+    // 3) is this how to do an if - else?
   }
   global {
-  	dist = function(x1, y1, x2, y2) {
+  	dist = function(xa, ya, xb, yb) {
   		r90 = math:pi() / 2;
   		rEk = 6378;
 
-  		rlata = math:deg2rad(x1);
-    	rlonga = math:deg2rad(y1);
-    	rlatb = math:deg2rad(x2);
-    	rlongb = math:deg2rad(y2);
+  		rlata = math:deg2rad(xa);
+    	rlonga = math:deg2rad(ya);
+    	rlatb = math:deg2rad(xb);
+    	rlongb = math:deg2rad(yb);
 
     	// dist between two coordinates in km
     	dE = math:great_circle_distance(rlonga,r90 - rlata, rlongb,r90 - rlatb, rEk);
@@ -33,7 +36,7 @@ ruleset lab7 {
   	}
   }
   rule nearby {
-    select when location current
+    select when location cur
     pre {
       lata = event:attr("lat");
       longa = event:attr("long");
