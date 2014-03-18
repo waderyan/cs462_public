@@ -24,7 +24,7 @@ ruleset TextSender {
       d = event:attr("distance");
     }
     {
-      twilio:send_sms(tonumber, fromnumber, "distance " + d);
+      twilio:send_sms(tonumber, fromnumber, d);
     }
   }
 }

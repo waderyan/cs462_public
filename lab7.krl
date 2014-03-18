@@ -11,6 +11,12 @@ ruleset lab7 {
     use module b505194x4 alias location_data
     // ID:881B7F00-AE35-11E3-8D4F-E906293232C8
     // b505194x6.prod
+    // https://cs.kobj.net/sky/event/881B7F00-AE35-11E3-8D4F-E906293232C8/1/location/current?_rids=b505194x6
+
+
+    // Questions:
+    // 1) how do I raise this event? - where do I put the above url?
+    // 2) why am I getting an http error for this rule set on validation?
   }
   global {
   	dist = function(x1, y1, x2, y2) {
@@ -23,7 +29,7 @@ ruleset lab7 {
     	rlongb = math:deg2rad(y2);
 
     	// dist between two coordinates in km
-    	dE = math:great_circle_distance(rlnga,r90 - rlata, rlngb,r90 - rlatb, rEk);
+    	dE = math:great_circle_distance(rlonga,r90 - rlata, rlongb,r90 - rlatb, rEk);
     	dE;
   	}
   }
@@ -45,9 +51,9 @@ ruleset lab7 {
     	notify("hello", "select when location current is within threshold");
     } 
     fired {
-    	raise explicit location_nearby with distance = d;
+    	raise location event nearby for b505194x7 with distance = d;
   	} else {
-  		raise explicit location_far with distance = d;
+  		raise location event far for b505194x7 with distance = d;
   	}
   }
 }
