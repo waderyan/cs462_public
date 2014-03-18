@@ -36,6 +36,8 @@ ruleset foursquare {
       city = c.pick("$.venue.location.city").as("str");
       shout = c.pick("$.shout").as("str");
       createdAt = c.pick("$.createdAt").as("num");
+      lat = c.pick("$.location.lat"); // check these
+      long = c.pick("$.location.lng"); // check these
     }
     {
       send_directive(venue) with checkin = venue;
@@ -49,7 +51,7 @@ ruleset foursquare {
         set ent:shout shout;
         set ent:createdAt createdAt;
 
-        raise pds event new_location_data for b505194x4 with test = venue and key = "fs_checkin" and value = {"venue" : venue, "city": city, "shout": shout, "createdAt" : createdAt };
+        raise pds event new_location_data for b505194x4 with test = venue and key = "fs_checkin" and value = {"venue" : venue, "city": city, "shout": shout, "createdAt" : createdAt, "long" : long, "lat" : lat };
       //  raise pds event new_location_data for b505194x4 with test = venue and key = "fs_checkin" and value = {"venue" : "bob", "city": "bobcity", "shout": "bobshout", "createdAt" : "bobcreatedAt" };
     }
   }

@@ -21,6 +21,8 @@ ruleset examine_location {
               <li><span>City: #{v.pick("$..city")}</span></li>
               <li><span>Shout: #{v.pick("$..shout")}</span></li>
               <li><span>Created At: #{v.pick("$..createdAt")}</span></li>
+              <li><span>Lat: #{v.pick("$..lat")}</span></li>
+              <li><span>Long: #{v.pick("$..long")}</span></li>
             </ul>
           </div>
         >>;
