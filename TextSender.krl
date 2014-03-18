@@ -29,4 +29,14 @@ ruleset TextSender {
       twilio:send_sms(tonumber, fromnumber, "distance " + d.as("str"));
     }
   }
+  rule too_far {
+    select when explicit location_far
+    pre {
+      tonumber = "+18018651729";
+      fromnumber = "+13852357279";
+    }
+    {
+      twilio:send_sms(tonumber, fromnumber, "too far");
+    }
+  }
 }
