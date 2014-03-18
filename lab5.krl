@@ -38,8 +38,8 @@ ruleset foursquare {
       city = c.pick("$.venue.location.city").as("str");
       shout = c.pick("$.shout").as("str");
       createdAt = c.pick("$.createdAt").as("num");
-      lat = c.pick("$.location.lat"); // check these
-      long = c.pick("$.location.lng"); // check these
+      lat = c.pick("$.location.lat").as("num"); // check these
+      long = c.pick("$.location.lng").as("num"); // check these
     }
     {
       send_directive(venue) with checkin = venue;
