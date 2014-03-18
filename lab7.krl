@@ -11,9 +11,9 @@ ruleset lab7 {
     use module b505194x4 alias location_data
     // ID:881B7F00-AE35-11E3-8D4F-E906293232C8
     // b505194x6.prod
-    // curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "value={'venue':{'name':'test venue', 'location' : {city':'Provo'}}, 'shout':'shouting', 'createdAt':1394122605}&_rids=b505194x6" https://cs.kobj.net/sky/event/881B7F00-AE35-11E3-8D4F-E906293232C8/1/location/current
+    // curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "value={'lat': 40.2503479550969, 'long': -111.652357578278}&_rids=b505194x6" https://cs.kobj.net/sky/event/881B7F00-AE35-11E3-8D4F-E906293232C8/1/location/cur
     // 
-    // https://cs.kobj.net/sky/event/881B7F00-AE35-11E3-8D4F-E906293232C8/1/location/current?_rids=b505194x6
+    // https://cs.kobj.net/sky/event/881B7F00-AE35-11E3-8D4F-E906293232C8/1/location/cur?_rids=b505194x6
 
     // Questions:
     // 1) how do I raise this event? - where do I put the above url?
@@ -50,6 +50,7 @@ ruleset lab7 {
       threshold = 50; // arbitrarily set
     }
     if (d < threshold) then {
+      send_directive("it worked") with distance = d;
     	notify("hello", "select when location current is within threshold");
     } 
     fired {
