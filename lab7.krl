@@ -49,14 +49,20 @@ ruleset lab7 {
       d = dist(lata, longa, latb, longb);
       threshold = 50; // arbitrarily set
     }
-    if (d < threshold) then {
+    {
       send_directive("it worked") with distance = d;
-    	notify("hello", "select when location current is within threshold");
-    } 
+      //if (d < threshold) then {
+      //  notify("hello", "select when location current is within threshold");
+      //} 
+    }
     fired {
-    	raise location event nearby for b505194x7 with distance = d;
-  	} else {
-  		raise location event far for b505194x7 with distance = d;
-  	}
+      raise location event nearby for b505194x7 with distance = d;
+    }
+   
+    //fired {
+    //	raise location event nearby for b505194x7 with distance = d;
+  	//} else {
+  	//	raise location event far for b505194x7 with distance = d;
+  	//}
   }
 }
