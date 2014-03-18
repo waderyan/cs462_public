@@ -8,6 +8,7 @@ ruleset lab7 {
     logging off
     use module a169x701 alias CloudRain
     use module a41x186 alias SquareTag
+    use module b505194x4 alias location_data
     // ID:881B7F00-AE35-11E3-8D4F-E906293232C8
   }
   global {
@@ -31,14 +32,16 @@ ruleset lab7 {
       lata = event:attr("lat");
       longa = event:attr("long");
 
-      latb = 1;
-      longb = 1;
+      v = location_data:get_location_data("fs_checkin");
+
+      latb = v.pick("$..lat");
+      longb = v.pick("$..long");
 
       d = dist(lata, longa, latb, longb);
-      threshold = 5;
+      threshold = 50; // arbitrarily set
     }
     if (d < threshold) then {
-    	// fire!
+    	notify("hello", "select when location current is within threshold");
     } 
     fired {
     	raise explicit location_nearby with distance = d;
