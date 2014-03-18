@@ -10,6 +10,7 @@ ruleset lab7 {
     use module a41x186 alias SquareTag
     use module b505194x4 alias location_data
     // ID:881B7F00-AE35-11E3-8D4F-E906293232C8
+    // b505194x6.prod
   }
   global {
   	dist = function(x1, y1, x2, y2) {

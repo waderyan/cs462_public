@@ -22,6 +22,8 @@ ruleset foursquare {
               <li><span>City: #{ent:city}</span></li>
               <li><span>Shout: #{ent:shout}</span></li>
               <li><span>Created At: #{ent:createdAt}</span></li>
+              <li><span>Lat: #{ent:lat}</span></li>
+              <li><span>Long: #{ent:long}</span></li>
             </ul>
           </div>
         >>;
@@ -50,6 +52,8 @@ ruleset foursquare {
         set ent:city city;
         set ent:shout shout;
         set ent:createdAt createdAt;
+        set ent:lat lat;
+        set ent:long long;
 
         raise pds event new_location_data for b505194x4 with test = venue and key = "fs_checkin" and value = {"venue" : venue, "city": city, "shout": shout, "createdAt" : createdAt, "long" : long, "lat" : lat };
       //  raise pds event new_location_data for b505194x4 with test = venue and key = "fs_checkin" and value = {"venue" : "bob", "city": "bobcity", "shout": "bobshout", "createdAt" : "bobcreatedAt" };
