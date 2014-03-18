@@ -12,7 +12,6 @@ ruleset lab7 {
   }
   global {
   	dist = function(x1, y1, x2, y2) {
-
   		r90 = math:pi() / 2;
   		rEk = 6378;
 
@@ -43,8 +42,8 @@ ruleset lab7 {
     } 
     fired {
     	raise explicit location_nearby with distance = d;
-	} else {
-		raise explicit location_far with distance = d;
-	}
+  	} else {
+  		raise explicit location_far with distance = d;
+  	}
   }
 }
