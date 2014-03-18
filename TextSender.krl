@@ -19,14 +19,14 @@ ruleset TextSender {
     use module a8x115 alias twilio with twiliokeys = keys:twilio()
   }
   rule send_location {
-    select when location nearby
+    select when explicit location_nearby
     pre {
       tonumber = "+18018651729";
       fromnumber = "+13852357279";
       d = event:attr("distance");
     }
     {
-      twilio:send_sms(tonumber, fromnumber, d);
+      twilio:send_sms(tonumber, fromnumber, "distance " + d.as("str"));
     }
   }
 }

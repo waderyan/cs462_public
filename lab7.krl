@@ -17,7 +17,7 @@ ruleset lab7 {
 
     // Questions:
     // 1) how do I raise this event? - where do I put the above url?
-    // 2) is this how to do an if - else?
+    // 2) how to do an if else?
   }
   global {
   	dist = function(xa, ya, xb, yb) {
@@ -48,18 +48,16 @@ ruleset lab7 {
       d = dist(lata, longa, latb, longb);
       threshold = 50; // arbitrarily set
     }
-    send_directive(lata) with longitude = longa and latitude = lata and distance = d;
-      //if (d < threshold) then {
-      //  notify("hello", "select when location current is within threshold");
-      //} 
+    if (d < threshold) then {
+      emit <<
+          console.log("Rule fired: location cur")
+      >>;
+    } 
     fired {
-      raise location event nearby for b505194x7 with distance = d;
+      raise explicit event location_nearby for b505194x7 with distance = d;
+    } else {
+      raise explicit event location_far for b505194x7 with distance = d;
     }
    
-    //fired {
-    //	raise location event nearby for b505194x7 with distance = d;
-  	//} else {
-  	//	raise location event far for b505194x7 with distance = d;
-  	//}
   }
 }
