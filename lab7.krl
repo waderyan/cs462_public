@@ -36,7 +36,7 @@ ruleset lab7 {
     display = function() {
       info = <<
           <div style="margin: 20px">
-            <h2>Text Sender</h2>
+            <h2>Lab 7</h2>
             <ul>
               <li><span>distance: #{ent:dist}</span></li>
               <li><span>state: #{ent:state}</span></li>
