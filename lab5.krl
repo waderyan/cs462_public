@@ -70,12 +70,9 @@ ruleset foursquare {
     }
   }
   
-  rule dispatch {
+  rule dispatcher {
     select when explicit notify_subscribers
       foreach subscribers setting (subscriber)
-        pre {
-          resp_cookie = math:random(99);
-        }
         event:send(subscriber,"location","notification")
             with attrs = {"lat" : event:attr("la"),
                           "long": event:attr("lo"),
