@@ -4,6 +4,9 @@ ruleset TextSender {
     description <<
       phonesender
     >>
+    key twilio {"account_sid" : "ACe8a279d1160fe29c824714cdec5605a5",
+                "auth_token"  : "b5cecc690e6b23d016dbc6977ece774d"
+    }
     author "Wade Anderson"
     logging off
     use module a169x701 alias CloudRain
@@ -12,9 +15,6 @@ ruleset TextSender {
     // ACe8a279d1160fe29c824714cdec5605a5
     // b5cecc690e6b23d016dbc6977ece774d
     // b505194x7.prod
-    key twilio {"account_sid" : "ACe8a279d1160fe29c824714cdec5605a5",
-                "auth_token"  : "b5cecc690e6b23d016dbc6977ece774d"
-    }
          
     use module a8x115 alias twilio with twiliokeys = keys:twilio()
   }
@@ -35,11 +35,9 @@ ruleset TextSender {
   rule send_location {
     select when explicit location_nearby
     pre {
-      tonumber = "8018651729";
-      fromnumber = "3852357279";
       d = event:attr("distance");
     }
-    twilio:send_sms(tonumber, fromnumber, "distance " + d.as("str"));
+    twilio:send_sms('8018651729', '3852357279', "distance " + d.as("str"));
     fired {
       set ent:state "close";
       set ent:distance d;
@@ -62,7 +60,7 @@ ruleset TextSender {
      select when web cloudAppSelected
     {
         SquareTag:inject_styling();
-        CloudRain:createLoadPanel("Foursquare Checkin Information", {}, display());       
+        CloudRain:createLoadPanel("Text Sender", {}, display());       
         emit <<
           console.log("cloud App selected")
         >>;

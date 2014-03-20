@@ -69,7 +69,7 @@ ruleset lab7 {
       emit <<
           console.log("Rule fired: location cur")
       >>;
-    } 
+    }
     fired {
       set ent:lata lata;
       set ent:longa longa;
