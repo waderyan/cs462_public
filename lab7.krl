@@ -51,7 +51,7 @@ ruleset lab7 {
     }
   }
   rule nearby {
-    select when explicit location_cur
+    select when location cur
     pre {
       lata = event:attr("latitude").as("num");
       longa = event:attr("longitude").as("num");
