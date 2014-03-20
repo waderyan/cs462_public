@@ -53,8 +53,8 @@ ruleset lab7 {
   rule nearby {
     select when location cur
     pre {
-      lata = event:attr("latitude").as("num");
-      longa = event:attr("longitude").as("num");
+      lata = event:attr("lat").as("num");
+      longa = event:attr("long").as("num");
 
       v = location_data:get_location_data("fs_checkin");
 
