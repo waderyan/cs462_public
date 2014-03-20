@@ -29,6 +29,14 @@ ruleset foursquare {
         >>;
         info;
     }
+    subscriber = [
+      {
+        "cid": "34CEC05C-B063-11E3-A4B0-7E9F833561DC"
+      },
+      {
+        "cid": "3D2ED3D6-B063-11E3-85CD-FADFAAD0D405"
+      }
+    ];
   }
   rule process_fs_checkin {
     select when foursquare checkin
@@ -55,10 +63,24 @@ ruleset foursquare {
         set ent:lat lat;
         set ent:long long;
 
+        raise explicit event notify_subscribers for b505194x3 with la = lat and lo = long and v = venue;
        // raise explicit event location_cur for b505194x6 with latitude = lat and longitude = long;
         raise pds event new_location_data for b505194x4 with test = venue and key = "fs_checkin" and value = {"venue" : venue, "city": city, "shout": shout, "createdAt" : createdAt, "long" : long, "lat" : lat };
       //  raise pds event new_location_data for b505194x4 with test = venue and key = "fs_checkin" and value = {"venue" : "bob", "city": "bobcity", "shout": "bobshout", "createdAt" : "bobcreatedAt" };
     }
+  }
+  
+  rule dispatch {
+    select when explicit notify_subscribers
+      foreach subscribers setting (subscriber)
+        pre {
+          resp_cookie = math:random(99);
+        }
+        event:send(subscriber,"location","notification")
+            with attrs = {"lat" : event:attr("la"),
+                          "long": event:attr("lo"),
+                          "venue": event:attr("v")
+                          };
   }
 
   rule display_checkin {
