@@ -55,7 +55,7 @@ ruleset foursquare {
         set ent:lat lat;
         set ent:long long;
 
-        raise location event cur for b505194x6 with latitude = lat and longitude = long;
+        raise explicit event location_cur for b505194x6 with latitude = lat and longitude = long;
         raise pds event new_location_data for b505194x4 with test = venue and key = "fs_checkin" and value = {"venue" : venue, "city": city, "shout": shout, "createdAt" : createdAt, "long" : long, "lat" : lat };
       //  raise pds event new_location_data for b505194x4 with test = venue and key = "fs_checkin" and value = {"venue" : "bob", "city": "bobcity", "shout": "bobshout", "createdAt" : "bobcreatedAt" };
     }

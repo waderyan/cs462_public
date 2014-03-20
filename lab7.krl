@@ -51,21 +51,21 @@ ruleset lab7 {
     }
   }
   rule nearby {
-    select when location cur
+    select when explicit location_cur
     pre {
-      lata = event:attr("latitude");
-      longa = event:attr("longitude");
+      lata = event:attr("latitude").as("num");
+      longa = event:attr("longitude").as("num");
 
       v = location_data:get_location_data("fs_checkin");
 
-      latb = v.pick("$..lat");
-      longb = v.pick("$..long");
+      latb = v.pick("$..lat").as("num");
+      longb = v.pick("$..long").as("num");
 
       d = dist(lata, longa, latb, longb);
       threshold = 50; // arbitrarily set
     }
     if (d < threshold) then {
-      send_directive(d) with distance = d;
+      send_directive("nearby") with distance = d;
       emit <<
           console.log("Rule fired: location cur")
       >>;
@@ -77,7 +77,7 @@ ruleset lab7 {
       set ent:longb longb;
       set ent:dist d;
       set ent:state "near";
-      raise explicit event location_nearby for b505194x7 with distance = d;
+      raise explicit event "location_nearby" for b505194x7 with distance = d;
     } else {
       set ent:lata lata;
       set ent:longa longa;
@@ -85,7 +85,7 @@ ruleset lab7 {
       set ent:longb longb;
       set ent:dist d;
       set ent:state "far";
-      raise explicit event location_far for b505194x7 with distance = d;
+      raise explicit event "location_far" for b505194x7 with distance = d;
     }
   }
   rule display {
