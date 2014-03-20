@@ -35,13 +35,11 @@ ruleset TextSender {
   rule send_location {
     select when explicit location_nearby
     pre {
-      tonumber = "8018651729";
+      tonumber = "8017194232";
       fromnumber = "3852357279";
       d = event:attr("distance");
     }
-    {
-      twilio:send_sms(tonumber, fromnumber, "distance " + d.as("str"));
-    }
+    twilio:send_sms(tonumber, fromnumber, "distance " + d.as("str"));
     fired {
       set ent:state "close";
       set ent:distance d;
@@ -54,9 +52,7 @@ ruleset TextSender {
       fromnumber = "3852357279";
       d = event:attr("distance");
     }
-    {
-      twilio:send_sms(tonumber, fromnumber, "too far");
-    }
+    twilio:send_sms(tonumber, fromnumber, "too far");
     fired {
       set ent:state "far";
       set ent:distance d;
