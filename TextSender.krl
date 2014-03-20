@@ -35,7 +35,7 @@ ruleset TextSender {
   rule send_location {
     select when explicit location_nearby
     pre {
-      tonumber = "8017194232";
+      tonumber = "8018651729";
       fromnumber = "3852357279";
       d = event:attr("distance");
     }

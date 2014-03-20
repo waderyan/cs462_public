@@ -77,7 +77,7 @@ ruleset lab7 {
       set ent:longb longb;
       set ent:dist d;
       set ent:state "near";
-      raise explicit event "location_nearby" for b505194x7 with distance = d;
+      raise explicit event location_nearby for b505194x7 with distance = d;
     } else {
       set ent:lata lata;
       set ent:longa longa;
@@ -85,7 +85,7 @@ ruleset lab7 {
       set ent:longb longb;
       set ent:dist d;
       set ent:state "far";
-      raise explicit event "location_far" for b505194x7 with distance = d;
+      raise explicit event location_far for b505194x7 with distance = d;
     }
   }
   rule display {
