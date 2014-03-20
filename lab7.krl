@@ -33,6 +33,22 @@ ruleset lab7 {
     	dE = math:great_circle_distance(rlonga,r90 - rlata, rlongb,r90 - rlatb, rEk);
     	dE;
   	}
+    display = function() {
+      info = <<
+          <div style="margin: 20px">
+            <h2>Text Sender</h2>
+            <ul>
+              <li><span>distance: #{ent:dist}</span></li>
+              <li><span>state: #{ent:state}</span></li>
+              <li><span>lata: #{ent:lata}</span></li>
+              <li><span>longa: #{ent:longa}</span></li>
+              <li><span>latb: #{ent:latb}</span></li>
+              <li><span>longb: #{ent:longb}</span></li>
+            </ul>
+          </div>
+        >>;
+        info;
+    }
   }
   rule nearby {
     select when location cur
@@ -49,15 +65,37 @@ ruleset lab7 {
       threshold = 50; // arbitrarily set
     }
     if (d < threshold) then {
+      send_directive(d) with distance = d;
       emit <<
           console.log("Rule fired: location cur")
       >>;
     } 
     fired {
+      set ent:lata lata;
+      set ent:longa longa;
+      set ent:latb latb;
+      set ent:longb longb;
+      set ent:dist d;
+      set ent:state "near";
       raise explicit event location_nearby for b505194x7 with distance = d;
     } else {
+      set ent:lata lata;
+      set ent:longa longa;
+      set ent:latb latb;
+      set ent:longb longb;
+      set ent:dist d;
+      set ent:state "far";
       raise explicit event location_far for b505194x7 with distance = d;
     }
-   
+  }
+  rule display {
+     select when web cloudAppSelected
+    {
+        SquareTag:inject_styling();
+        CloudRain:createLoadPanel("Foursquare Checkin Information", {}, display());       
+        emit <<
+          console.log("cloud App selected")
+        >>;
+    }
   }
 }

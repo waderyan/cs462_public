@@ -18,6 +18,20 @@ ruleset TextSender {
          
     use module a8x115 alias twilio with twiliokeys = keys:twilio()
   }
+  global {
+    display = function() {
+      info = <<
+          <div style="margin: 20px">
+            <h2>Text Sender</h2>
+            <ul>
+              <li><span>distance: #{ent:distance}</span></li>
+              <li><span>state: #{ent:state}</span></li>
+            </ul>
+          </div>
+        >>;
+        info;
+    }
+  }
   rule send_location {
     select when explicit location_nearby
     pre {
@@ -28,15 +42,34 @@ ruleset TextSender {
     {
       twilio:send_sms(tonumber, fromnumber, "distance " + d.as("str"));
     }
+    fired {
+      set ent:state "close";
+      set ent:distance d;
+    }
   }
   rule too_far {
     select when explicit location_far
     pre {
       tonumber = "+18018651729";
       fromnumber = "+13852357279";
+      d = event:attr("distance");
     }
     {
       twilio:send_sms(tonumber, fromnumber, "too far");
+    }
+    fired {
+      set ent:state "far";
+      set ent:distance d;
+    }
+  }
+  rule display {
+     select when web cloudAppSelected
+    {
+        SquareTag:inject_styling();
+        CloudRain:createLoadPanel("Foursquare Checkin Information", {}, display());       
+        emit <<
+          console.log("cloud App selected")
+        >>;
     }
   }
 }

@@ -12,7 +12,6 @@ ruleset examine_location {
   }
   global {
     checkinToHtml = function(v) {
-
         info = <<
           <div style="margin: 20px">
             <h2>Examine Checkin Information</h2>
