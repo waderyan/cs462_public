@@ -29,7 +29,7 @@ ruleset foursquare {
         >>;
         info;
     }
-    subscriber = [
+    subscribers = [
       {
         "cid": "34CEC05C-B063-11E3-A4B0-7E9F833561DC"
       },
