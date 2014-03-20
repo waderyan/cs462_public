@@ -53,8 +53,8 @@ ruleset lab7 {
   rule nearby {
     select when location cur
     pre {
-      lata = event:attr("lat");
-      longa = event:attr("long");
+      lata = event:attr("latitude");
+      longa = event:attr("longitude");
 
       v = location_data:get_location_data("fs_checkin");
 
@@ -92,7 +92,7 @@ ruleset lab7 {
      select when web cloudAppSelected
     {
         SquareTag:inject_styling();
-        CloudRain:createLoadPanel("Foursquare Checkin Information", {}, display());       
+        CloudRain:createLoadPanel("Lab 7", {}, display());       
         emit <<
           console.log("cloud App selected")
         >>;
