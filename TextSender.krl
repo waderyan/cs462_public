@@ -4,8 +4,8 @@ ruleset TextSender {
     description <<
       phonesender
     >>
-    key twilio {"account_sid" : "ACe8a279d1160fe29c824714cdec5605a5",
-                "auth_token"  : "b5cecc690e6b23d016dbc6977ece774d"
+    key twilio {"account_sid" : "AC424049b8589671bff69d5a0d74b60e17",
+                "auth_token"  : "dee94754596f9183fec3adcc1a37a785"
     }
     author "Wade Anderson"
     logging off
